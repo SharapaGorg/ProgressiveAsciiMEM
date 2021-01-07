@@ -69,7 +69,7 @@ def covertImageToAscii(fileName, cols, scale, moreLevels):
     return aimg
 
 def VideoDivider():
-    camera = cv2.VideoCapture("assets\\TMD2.gif")
+    camera = cv2.VideoCapture("assets\\y2mate.com - Kuroko no Baske TV3 OP1 Баскетбол Куроко 3 сезон 1 опенинг_v144P.mp4")
     i = 0
 
     while True:
@@ -114,9 +114,10 @@ def ASCIIRoat():
         os.chdir("../")
         os.chdir("frames_")
 
-        with open(f"{l}.txt", "w") as file:
+        with open('{0:05d}.txt'.format(l), "w") as file:
             for i in aimg:
                 file.write(i)
+
         l += 1
 
         os.chdir("../")
@@ -146,18 +147,17 @@ else:
 if len(os.listdir("frames_")) == 0:
     ASCIIRoat()
 
+stdscr = curses.initscr()
+curses.noecho()
+curses.cbreak()
+
 if len(os.listdir()) != 0:
-
-    while 1:
-        try:
-            stdscr = curses.initscr()
-            curses.noecho()
-            curses.cbreak()
-
-            main()
-
-            curses.echo()
-            curses.nocbreak()
-            curses.endwin()  
-        except Exception as ex:
-            print(ex) 
+    try:
+        while 1:
+            main() 
+    except Exception as ex:
+        print(ex) 
+    finally:
+        curses.echo()
+        curses.nocbreak()
+        curses.endwin() 
